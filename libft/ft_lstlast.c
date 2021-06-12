@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 20:34:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/11 20:52:31 by sesnowbi         ###   ########.fr       */
+/*   Created: 2020/11/06 01:06:52 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/04/14 17:04:18 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+t_list	*ft_lstlast(t_list *lst)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	printf("shell\n");
-	return (0);
+	if (lst)
+	{
+		while (lst->next)
+			lst = lst->next;
+		return (lst);
+	}
+	return (NULL);
 }

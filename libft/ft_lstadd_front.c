@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 20:34:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/11 20:52:31 by sesnowbi         ###   ########.fr       */
+/*   Created: 2020/11/05 23:50:12 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/05/19 18:29:43 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+void	ft_lstadd_front(t_list **lst, t_list *neww)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	printf("shell\n");
-	return (0);
+	if (lst && neww)
+	{
+		if (*lst)
+			neww->next = *lst;
+		*lst = neww;
+	}
 }

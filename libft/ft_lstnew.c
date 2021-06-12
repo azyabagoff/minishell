@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 20:34:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/11 20:52:31 by sesnowbi         ###   ########.fr       */
+/*   Created: 2020/11/05 23:30:30 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/04/14 17:22:11 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+t_list	*ft_lstnew(void *content)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	printf("shell\n");
-	return (0);
+	t_list	*elem;
+
+	elem = NULL;
+	elem = (t_list *)malloc(sizeof(t_list));
+	if (!elem)
+		return (NULL);
+	elem->content = content;
+	elem->next = NULL;
+	return (elem);
 }

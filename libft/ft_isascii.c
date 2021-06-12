@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 20:34:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/11 20:52:31 by sesnowbi         ###   ########.fr       */
+/*   Created: 2020/10/29 22:13:35 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/04/14 17:03:06 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+int	ft_isascii(int c)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	printf("shell\n");
-	return (0);
+	return (c >= 0 && c <= 127);
 }

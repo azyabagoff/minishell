@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 20:34:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/11 20:52:31 by sesnowbi         ###   ########.fr       */
+/*   Created: 2020/10/29 15:09:28 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/04/14 17:05:22 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+size_t	ft_strlcpy(char *dst,
+			const char *src, size_t dstsize)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	printf("shell\n");
-	return (0);
+	size_t	i;
+
+	if (!dst || !src)
+		return (0);
+	i = 0;
+	if (dstsize > 0)
+	{
+		while (i < dstsize - 1 && src[i])
+		{
+			dst[i] = src[i];
+			++i;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
 }

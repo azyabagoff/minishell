@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 20:34:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/11 20:52:31 by sesnowbi         ###   ########.fr       */
+/*   Created: 2020/10/28 19:42:47 by sesnowbi          #+#    #+#             */
+/*   Updated: 2020/11/08 16:12:53 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	printf("shell\n");
-	return (0);
+	size_t			i;
+	unsigned char	*str1;
+
+	i = 0;
+	str1 = (unsigned char *)dst;
+	if (!n || dst == src)
+		return (dst);
+	while (i < n)
+	{
+		*(char *)(str1 + i) = *(char *)(src + i);
+		++i;
+	}
+	return (dst);
 }

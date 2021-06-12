@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/11 20:34:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/11 20:52:31 by sesnowbi         ###   ########.fr       */
+/*   Created: 2020/11/06 00:50:23 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/04/14 17:04:29 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+int	ft_lstsize(t_list *lst)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	printf("shell\n");
+	int		size;
+	t_list	*ptr;
+
+	size = 0;
+	ptr = NULL;
+	if (lst)
+	{
+		ptr = lst;
+		while (ptr->next)
+		{
+			ptr = ptr->next;
+			++size;
+		}
+		return (++size);
+	}
 	return (0);
 }
