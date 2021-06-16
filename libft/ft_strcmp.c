@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/29 15:00:04 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/13 17:04:57 by sesnowbi         ###   ########.fr       */
+/*   Created: 2021/06/13 16:50:06 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/06/13 16:53:05 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t	size;
+	int	len1;
+	int	len2;
 
-	if (!s)
-		return (0);
-	size = 0;
-	while (s[size])
-		++size;
-	return (size);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	return (ft_strncmp(s1, s2, ft_tern_i((len1 > len2), len1, len2)));
 }

@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   check_env_exists.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/29 15:00:04 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/13 17:04:57 by sesnowbi         ###   ########.fr       */
+/*   Created: 2021/06/15 22:17:40 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/06/15 23:25:09 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-size_t	ft_strlen(const char *s)
+int	check_env_exists(char **envs, char *name)
 {
-	size_t	size;
+	int		i;
+	char	*cur_env_name;
 
-	if (!s)
-		return (0);
-	size = 0;
-	while (s[size])
-		++size;
-	return (size);
+	i = 0;
+	cur_env_name = NULL;
+	while (envs && envs[i])
+	{
+		cur_env_name = get_env_name(envs[i]);
+		if (!ft_strcmp(cur_env_name, name))
+			return (i);
+		free(cur_env_name);
+		cur_env_name = NULL;
+		++i;
+	}
+	return (-1);
 }

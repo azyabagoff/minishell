@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:51:09 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/02 23:59:09 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/13 16:51:06 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char				*ft_strrchr(const char *s, int c);
 char				*ft_strnstr(const char *haystack,
 						const char *needle, size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_strcmp(const char *s1, const char *s2);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);

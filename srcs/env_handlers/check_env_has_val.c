@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   check_env_has_val.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/29 15:00:04 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/13 17:04:57 by sesnowbi         ###   ########.fr       */
+/*   Created: 2021/06/15 22:11:21 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/06/15 22:30:52 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-size_t	ft_strlen(const char *s)
+int	check_env_has_val(char *env)
 {
-	size_t	size;
+	int	i;
 
-	if (!s)
+	i = 0;
+	while (env && env[i] && env[i] != '=')
+		++i;
+	if (i == (int)ft_strlen(env))
 		return (0);
-	size = 0;
-	while (s[size])
-		++size;
-	return (size);
+	return (1);
 }
