@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_env_exists.c                                 :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/15 22:17:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/17 14:16:48 by sesnowbi         ###   ########.fr       */
+/*   Created: 2021/06/17 19:05:03 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/06/17 19:40:32 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	check_env_exists(char **envs, char *name)
+int	ft_pwd(void)
 {
-	int		i;
-	char	*cur_env_name;
+	char	*path;
 
-	i = 0;
-	cur_env_name = NULL;
-	while (envs && envs[i])
+	path = getcwd(NULL, 0);
+	if (!path)
 	{
-		cur_env_name = get_env_name(envs[i]);
-		if (!ft_strcmp(cur_env_name, name))
-		{
-			free(cur_env_name);
-			cur_env_name = NULL;
-			return (i);
-		}
-		free(cur_env_name);
-		cur_env_name = NULL;
-		++i;
+		ft_putstr_fd("minishell: pwd: ", 1);
+		ft_putstr_fd(strerror(errno), 1);
+		ft_putstr_fd("\n", 1);
+		return (1);
 	}
-	return (-1);
+	ft_putstr_fd(path, 1);
+	ft_putstr_fd("\n", 1);
+	free(path);
+	path = NULL;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/16 22:19:25 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/17 22:08:47 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,8 @@ void				del_env_by_name(char ***envs, char *name);
 void				del_uninit_envs(char ***envs);
 int					ft_echo(char **args);
 int					ft_cd(char ***envs, char **args);
+int					ft_pwd(void);
+int					ft_export(char ***envs, char **args);
+int					check_correct_id(char *str);
 
 #endif

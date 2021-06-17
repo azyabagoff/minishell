@@ -6,7 +6,7 @@
 #    By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/07 18:33:46 by sesnowbi          #+#    #+#              #
-#    Updated: 2021/06/16 15:38:22 by sesnowbi         ###   ########.fr        #
+#    Updated: 2021/06/17 20:20:46 by sesnowbi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS	= test_main.c GNL/get_next_line.c GNL/get_next_line_utils.c \
 			srcs/other_utils/utils_2dim_arr.c srcs/other_utils/exit_errors.c srcs/other_utils/realloc_2dim_arr.c \
 			srcs/env_handlers/get_env.c srcs/env_handlers/set_env.c srcs/env_handlers/check_env_has_val.c srcs/env_handlers/check_env_exists.c \
 			srcs/env_handlers/del_env_by_name.c srcs/env_handlers/del_uninit_envs.c \
-			srcs/builtins/echo.c srcs/builtins/cd.c
+			srcs/builtins/echo.c srcs/builtins/cd.c srcs/builtins/pwd.c srcs/builtins/export.c \
 
 INC		= includes/minishell.h
 DEPS	= $(INC) $(LIBFT_D)/$(LIBFT_H)
@@ -28,8 +28,8 @@ OBJS	= $(SRCS:.c=.o)
 
 CC		= gcc
 RM		= /bin/rm -f
-CFLAGS	= -g -Wall -Werror -Wextra -fsanitize=address
-FLAGS	= -g -lreadline -Llibft -lft -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	= -g -Wall -Werror -Wextra# -fsanitize=address
+FLAGS	= -g -lreadline -Llibft -lft -Wall -Werror -Wextra# -fsanitize=address
 
 %.o: %.c $(DEPS)
 	$(CC) $(CFLAGS) -c $< -include $(INC) -o $(<:.c=.o)
