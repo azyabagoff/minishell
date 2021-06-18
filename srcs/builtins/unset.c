@@ -1,45 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/12 19:55:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/18 16:53:30 by sesnowbi         ###   ########.fr       */
+/*   Created: 2021/06/18 13:45:37 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/06/18 13:58:34 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	echo_cases(char *str, int *flag, int i)
-{
-	if (i == 1)
-	{
-		if (!ft_strcmp(str, "-n"))
-			*flag = 1;
-		else
-			ft_putstr_fd(str, 1);
-	}
-	else if (i == 2 && *flag)
-		ft_putstr_fd(str, 1);
-	else
-	{
-		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(str, 1);
-	}
-}
-
-int	ft_echo(char **args)
+int	ft_unset(char ***envs, char **args)
 {
 	int		i;
-	int		flag;
 
-	i = 0;
-	flag = 0;
-	while (args[++i])
-		echo_cases(args[i], &flag, i);
-	if (!flag)
-		ft_putstr_fd("\n", 1);
+	if (!args[1])
+		return (0);
+	i = 1;
+	while (args && args[i])
+	{
+		if (!check_correct_id(args[i]))
+		{
+			ft_putstr_fd("minishell: unset: `", 1);
+			ft_putstr_fd(args[i], 1);
+			ft_putstr_fd("': not a valid identifier\n", 1);
+		}
+		else
+			del_env_by_name(envs, args[i]);
+		++i;
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 20:53:11 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/17 21:39:21 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/18 21:27:01 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,20 @@ int	main(int argc, char *argv[], char *envp[])
 			continue ;
 		if (!ft_strcmp(args[0], "echo"))
 			g_status = ft_echo(args);
-		if (!ft_strcmp(args[0], "cd"))
+		else if (!ft_strcmp(args[0], "cd"))
 			g_status = ft_cd(&cp_envp, args);
-		if (!ft_strcmp(args[0], "pwd"))
+		else if (!ft_strcmp(args[0], "pwd"))
 			g_status = ft_pwd();
-		if (!ft_strcmp(args[0], "export"))
+		else if (!ft_strcmp(args[0], "export"))
 			g_status = ft_export(&cp_envp, args);
+		else if (!ft_strcmp(args[0], "unset"))
+			g_status = ft_unset(&cp_envp, args);
+		else if (!ft_strcmp(args[0], "env"))
+			g_status = ft_env(cp_envp, args);
+		else if (!ft_strcmp(args[0], "exit"))
+			g_status = ft_exit(&cp_envp, &args);
 		free_2dim_arr(args);
 		args = NULL;
 	}
-	free_2dim_arr(cp_envp);
-	cp_envp = NULL;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/17 22:08:47 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/18 18:25:15 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <string.h>
 # include <errno.h>
 
-int					g_status;
+long long	g_status;
 
 char				**copy_2dim_arr(char **arr);
 void				free_2dim_arr(char **arr);
@@ -41,5 +41,9 @@ int					ft_cd(char ***envs, char **args);
 int					ft_pwd(void);
 int					ft_export(char ***envs, char **args);
 int					check_correct_id(char *str);
+int					ft_unset(char ***envs, char **args);
+int					ft_env(char **envs, char **args);
+void				print_envs(char **envs, int uninit);
+int					ft_exit(char ***envs, char ***args);
 
 #endif

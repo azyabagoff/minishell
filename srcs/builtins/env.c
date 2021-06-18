@@ -1,45 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/12 19:55:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/18 16:53:30 by sesnowbi         ###   ########.fr       */
+/*   Created: 2021/06/18 14:08:34 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/06/18 16:24:52 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	echo_cases(char *str, int *flag, int i)
+void	print_envs(char **envs, int pr_uninit)
 {
-	if (i == 1)
+	int		i;
+
+	i = 0;
+	while (envs && envs[i])
 	{
-		if (!ft_strcmp(str, "-n"))
-			*flag = 1;
-		else
-			ft_putstr_fd(str, 1);
-	}
-	else if (i == 2 && *flag)
-		ft_putstr_fd(str, 1);
-	else
-	{
-		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(str, 1);
+		if (!pr_uninit)
+		{
+			if (!check_env_has_val(envs[i]))
+			{
+				++i;
+				continue ;
+			}
+		}
+		ft_putstr_fd(envs[i], 1);
+		ft_putstr_fd("\n", 1);
+		++i;
 	}
 }
 
-int	ft_echo(char **args)
+int	ft_env(char **envs, char **args)
 {
-	int		i;
-	int		flag;
-
-	i = 0;
-	flag = 0;
-	while (args[++i])
-		echo_cases(args[i], &flag, i);
-	if (!flag)
-		ft_putstr_fd("\n", 1);
+	if (args[1])
+	{
+		ft_putstr_fd(
+			"minishell: env: arguments and options are not supported\n", 1);
+		return (1);
+	}
+	print_envs(envs, 0);
 	return (0);
 }
