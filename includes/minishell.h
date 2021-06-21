@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/18 18:25:15 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/21 14:08:44 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void				free_2dim_arr(char **arr);
 int					count_els_2dim_arr(char **arr);
 void				realloc_2dim_arr(char ***arr, int size_new);
 void				sort_2dim_arr(char ***arr);
-void				exit_err_malloc(void);
+void				exit_err_malloc(char **arr, char *str1);
 char				*get_env(char **envs, char *name);
 char				*get_env_name(char *env);
 int					check_env_has_val(char *env);

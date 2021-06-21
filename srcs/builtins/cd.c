@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:51:03 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/17 18:24:29 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/21 14:11:26 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ static int	go_from_home(char ***envs, char *arg)
 	i = 2;
 	tmp = ft__strjoin(tmp, "/");
 	if (!tmp)
-		exit_err_malloc();
+		exit_err_malloc(NULL, NULL);
 	tmp = ft__strjoin(tmp, arg + 2);
 	if (!tmp)
-		exit_err_malloc();
+		exit_err_malloc(NULL, NULL);
 	if (!go_to_path(envs, tmp))
 	{
 		free(tmp);

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 17:22:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/15 23:42:07 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/21 14:08:30 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	set_env_name(char ***envs, char *name, int size_old)
 	realloc_2dim_arr(envs, size_old + 1);
 	(*envs)[size_old] = ft_strdup(name);
 	if (!(*envs))
-		exit_err_malloc();
+		exit_err_malloc(NULL, NULL);
 }
 
 static void	set_env_name_val1(char ***envs, char *name,
@@ -29,16 +29,16 @@ static void	set_env_name_val1(char ***envs, char *name,
 	realloc_2dim_arr(envs, size_old + 1);
 	tmp_val = ft_strjoin(name, "=");
 	if (!tmp_val)
-		exit_err_malloc();
+		exit_err_malloc(NULL, NULL);
 	if (*value)
 	{
 		tmp_val = ft__strjoin(tmp_val, value);
 		if (!tmp_val)
-			exit_err_malloc();
+			exit_err_malloc(NULL, NULL);
 	}
 	(*envs)[size_old] = ft_strdup(tmp_val);
 	if (!((*envs)[size_old]))
-		exit_err_malloc();
+		exit_err_malloc(NULL, tmp_val);
 	free(tmp_val);
 	tmp_val = NULL;
 }
@@ -52,16 +52,16 @@ static void	set_env_name_val2(char ***envs, char *name, char *value, int ind)
 	(*envs)[ind] = NULL;
 	tmp_val = ft_strjoin(name, "=");
 	if (!tmp_val)
-		exit_err_malloc();
+		exit_err_malloc(NULL, NULL);
 	if (*value)
 	{
 		tmp_val = ft__strjoin(tmp_val, value);
 		if (!tmp_val)
-			exit_err_malloc();
+			exit_err_malloc(NULL, NULL);
 	}
 	(*envs)[ind] = ft_strdup(tmp_val);
 	if (!((*envs)[ind]))
-		exit_err_malloc();
+		exit_err_malloc(NULL, tmp_val);
 	free(tmp_val);
 	tmp_val = NULL;
 }

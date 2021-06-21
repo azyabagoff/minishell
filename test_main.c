@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 20:53:11 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/18 21:27:01 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:36:18 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ int	main(int argc, char *argv[], char *envp[])
 		args = ft_split(line, ' ');
 		free(line);
 		line = NULL;
-		if (!args || !args[0])
+		if (!args)
 			continue ;
+		if (!args[0])
+		{
+			free(args);
+			continue ;
+		}
 		if (!ft_strcmp(args[0], "echo"))
 			g_status = ft_echo(args);
 		else if (!ft_strcmp(args[0], "cd"))

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:19:32 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/17 23:32:41 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/21 14:30:12 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static void	export_print(char ***envs)
 		{
 			ft_putstr_fd("=\"", 1);
 			ft_putstr_fd(cp_envs[i] + ft_strlen(name) + 1, 1);
-			free(name);
-			name = NULL;
 			ft_putstr_fd("\"", 1);
 		}
+		free(name);
+		name = NULL;
 		ft_putstr_fd("\n", 1);
 		++i;
 	}
