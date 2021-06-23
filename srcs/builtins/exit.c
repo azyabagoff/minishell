@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:38:43 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/18 21:12:09 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/22 15:07:12 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,5 @@ int	ft_exit(char ***envs, char ***args)
 	}
 	free_2dim_arr(*envs);
 	free_2dim_arr(*args);
-	exit(cast_status(g_status));
-	return (0);
+	return (cast_status(g_status));
 }

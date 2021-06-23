@@ -6,7 +6,7 @@
 #    By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/07 18:33:46 by sesnowbi          #+#    #+#              #
-#    Updated: 2021/06/18 15:37:28 by sesnowbi         ###   ########.fr        #
+#    Updated: 2021/06/23 23:40:43 by sesnowbi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS	= test_main.c GNL/get_next_line.c GNL/get_next_line_utils.c \
 			srcs/env_handlers/get_env.c srcs/env_handlers/set_env.c srcs/env_handlers/check_env_has_val.c srcs/env_handlers/check_env_exists.c \
 			srcs/env_handlers/del_env_by_name.c srcs/env_handlers/del_uninit_envs.c \
 			srcs/builtins/echo.c srcs/builtins/cd.c srcs/builtins/pwd.c srcs/builtins/export.c srcs/builtins/unset.c srcs/builtins/env.c srcs/builtins/exit.c \
+			srcs/execution/exec_bin.c
 
 INC		= includes/minishell.h
 DEPS	= $(INC) $(LIBFT_D)/$(LIBFT_H)

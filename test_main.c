@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 20:53:11 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/21 13:36:18 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/23 23:44:09 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		line = readline("minishell > ");
+		if (line && line[0])
+			add_history(line);
 		args = ft_split(line, ' ');
 		free(line);
 		line = NULL;
@@ -50,7 +52,12 @@ int	main(int argc, char *argv[], char *envp[])
 		else if (!ft_strcmp(args[0], "env"))
 			g_status = ft_env(cp_envp, args);
 		else if (!ft_strcmp(args[0], "exit"))
+		{
 			g_status = ft_exit(&cp_envp, &args);
+			return (g_status);
+		}
+		else
+			g_status = exec_bin(args, cp_envp);
 		free_2dim_arr(args);
 		args = NULL;
 	}

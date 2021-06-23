@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/21 14:08:44 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/23 21:47:15 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
 # include <readline/history.h>
 # include <string.h>
 # include <errno.h>
+# include <dirent.h>
+# include <fcntl.h>
 
 long long	g_status;
+int			g_pid;
 
 char				**copy_2dim_arr(char **arr);
 void				free_2dim_arr(char **arr);
@@ -45,5 +48,6 @@ int					ft_unset(char ***envs, char **args);
 int					ft_env(char **envs, char **args);
 void				print_envs(char **envs, int uninit);
 int					ft_exit(char ***envs, char ***args);
+int					exec_bin(char **args, char **envs);
 
 #endif
