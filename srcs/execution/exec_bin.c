@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:59:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/23 23:37:05 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/25 23:18:53 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,11 @@ static int	check_bin_exec(char *path, char **args, char **envs)
 {
 	DIR	*folder;
 	int	fd;
+	int	ret;
 
 	fd = open(path, O_RDONLY);
 	folder = opendir(path);
+	ret = 0;
 	if (folder != NULL)
 	{
 		closedir(folder);
@@ -84,8 +86,11 @@ static int	check_bin_exec(char *path, char **args, char **envs)
 	if (folder)
 		closedir(folder);
 	close(fd);
-	execve(path, args, envs);
-	return (0);
+	g_pid = fork();
+	if (!g_pid)
+		exit_no_err(execve(path, args, envs));
+	waitpid(g_pid, &ret, 0);
+	return (ret / 256);
 }
 
 static int	join_path_to_cmd(char **args, char **envs, char **path)

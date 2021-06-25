@@ -6,13 +6,13 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:38:43 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/22 15:07:12 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/25 23:45:13 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	cast_status(long long status)
+int	cast_status(long long status)
 {
 	if (status < 0)
 		return (256 - (status % 256));
@@ -85,5 +85,5 @@ int	ft_exit(char ***envs, char ***args)
 	}
 	free_2dim_arr(*envs);
 	free_2dim_arr(*args);
-	return (cast_status(g_status));
+	exit(cast_status(g_status));
 }
