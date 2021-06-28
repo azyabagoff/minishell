@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:38:43 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/25 23:45:13 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/28 21:39:07 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,30 @@ static int	belongs_long_long(char *str)
 	return (1);
 }
 
-int	ft_exit(char ***envs, char ***args)
+int	ft_exit(t_mini *mini)
 {
 	ft_putstr_fd("exit\n", 1);
-	if (args && (*args)[1])
+	if (mini->els->args && mini->els->args[1])
 	{
-		if (!is_numeric((*args)[1]) || !belongs_long_long((*args)[1]))
+		if (!is_numeric(mini->els->args[1])
+			|| !belongs_long_long(mini->els->args[1]))
 		{
 			ft_putstr_fd("minishell: exit: ", 1);
-			ft_putstr_fd((*args)[1], 1);
+			ft_putstr_fd(mini->els->args[1], 1);
 			ft_putstr_fd(": numeric argument required\n", 1);
-			g_status = 255;
+			mini->status = 255;
 		}
 		else
 		{
-			if ((*args)[2])
+			if (mini->els->args[2])
 			{
 				ft_putstr_fd("minishell: exit: ", 1);
 				ft_putstr_fd(": too many arguments\n", 1);
 				return (1);
 			}
-			g_status = ft_atoll((*args)[1]);
+			mini->status = ft_atoll(mini->els->args[1]);
 		}
 	}
-	free_2dim_arr(*envs);
-	free_2dim_arr(*args);
-	exit(cast_status(g_status));
+	free_mini_strct(mini, 1);
+	exit(cast_status(mini->status));
 }

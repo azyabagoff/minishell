@@ -6,30 +6,70 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 20:53:11 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/26 00:07:44 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/28 21:58:11 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
+///
+
+t_els	*last_el(t_els *el)
+{
+	if (el)
+	{
+		while (el->next)
+			el = el->next;
+		return (el);
+	}
+	return (NULL);
+}
+
+void	mini_push_el(t_mini *mini, char **args)
+{
+	t_els	*el;
+	t_els	*neww;
+
+	el = NULL;
+	neww = (t_els *)malloc(sizeof(t_els));
+	neww->args = copy_2dim_arr(args);
+	neww->next = NULL;
+	if (mini->els)
+	{
+		el = last_el(mini->els);
+		el->next = neww;
+		neww->next = NULL;
+	}
+	else
+	{
+		mini->els = neww;
+		neww->next = NULL;
+	}
+}
+///
+
 int	main(int argc, char *argv[], char *envp[])
 {
-	char	*line;
-	char	**args;
-	char	**cp_envp;
+	char		*line;
+	char		**args;
+	char		**args1;
+	int			i;
+	t_mini		mini;
 
 	(void)argc;
 	(void)argv;
+	mini.els = NULL;
 	args = NULL;
-	cp_envp = NULL;
+	args1 = NULL;
 	line = NULL;
-	cp_envp = copy_2dim_arr(envp);
+	i = 0;
+	mini.envs = copy_2dim_arr(envp);
 	while (1)
 	{
 		line = readline("minishell > ");
 		if (line && line[0])
 			add_history(line);
-		args = ft_split(line, ' ');
+		args = ft_split(line, '|');
 		free(line);
 		line = NULL;
 		if (!args)
@@ -39,24 +79,19 @@ int	main(int argc, char *argv[], char *envp[])
 			free(args);
 			continue ;
 		}
-		if (!ft_strcmp(args[0], "echo"))
-			g_status = ft_echo(args);
-		else if (!ft_strcmp(args[0], "cd"))
-			g_status = ft_cd(&cp_envp, args);
-		else if (!ft_strcmp(args[0], "pwd"))
-			g_status = ft_pwd();
-		else if (!ft_strcmp(args[0], "export"))
-			g_status = ft_export(&cp_envp, args);
-		else if (!ft_strcmp(args[0], "unset"))
-			g_status = ft_unset(&cp_envp, args);
-		else if (!ft_strcmp(args[0], "env"))
-			g_status = ft_env(cp_envp, args);
-		else if (!ft_strcmp(args[0], "exit"))
-			g_status = ft_exit(&cp_envp, &args);
-		else
-			g_status = exec_bin(args, cp_envp);
+		i = 0;
+		while (args[i])
+		{
+			args1 = ft_split(args[i], ' ');
+			mini_push_el(&mini, args1);
+			free_2dim_arr(args1);
+			args1 = NULL;
+			++i;
+		}
 		free_2dim_arr(args);
 		args = NULL;
+		mini.start_el = mini.els;
+		execution(&mini);
 	}
 	return (0);
 }

@@ -1,30 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_errors.c                                      :+:      :+:    :+:   */
+/*   free_mini_strct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/15 13:24:24 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 21:20:37 by sesnowbi         ###   ########.fr       */
+/*   Created: 2021/06/28 21:43:33 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/06/28 21:44:06 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exit_err_malloc(t_mini *mini, char **arr, char *str1)
+void	free_els_list(t_mini *mini)
 {
-	free_mini_strct(mini, 1);
-	free_2dim_arr(arr);
-	if (str1)
-		free(str1);
-	ft_putstr_fd("Error.\nMalloc error.\n", 1);
-	mini->status = 1;
-	exit(1);
+	t_els	*el;
+
+	el = NULL;
+	if (mini->start_el)
+	{
+		while (mini->start_el)
+		{
+			el = mini->start_el->next;
+			free_2dim_arr(mini->start_el->args);
+			free(mini->start_el);
+			mini->start_el = el;
+		}
+	}
 }
 
-void	exit_no_err(t_mini *mini, int ret)
+void	free_mini_strct(t_mini *mini, int free_envs)
 {
-	free_mini_strct(mini, 1);
-	exit(ret);
+	if (free_envs)
+	{
+		if (mini->envs)
+		{
+			free_2dim_arr(mini->envs);
+			mini->envs = NULL;
+		}
+	}
+	free_els_list(mini);
 }

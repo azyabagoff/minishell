@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:18:56 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/21 14:18:38 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/28 20:45:00 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,28 @@ char	**copy_2dim_arr(char **arr)
 	return (cp_arr);
 }
 
-static void	swap_strings(char ***arr, int i, int j)
+static void	swap_strings(t_mini *mini, char ***arr, int i, int j)
 {
 	char	*tmp_str;
 
 	tmp_str = ft_strdup((*arr)[i]);
 	if (!tmp_str)
-		exit_err_malloc(NULL, NULL);
+		exit_err_malloc(mini, NULL, NULL);
 	free((*arr)[i]);
 	(*arr)[i] = NULL;
 	(*arr)[i] = ft_strdup((*arr)[j]);
 	if (!(*arr)[i])
-		exit_err_malloc(NULL, tmp_str);
+		exit_err_malloc(mini, NULL, tmp_str);
 	free((*arr)[j]);
 	(*arr)[j] = NULL;
 	(*arr)[j] = ft_strdup(tmp_str);
 	if (!(*arr)[j])
-		exit_err_malloc(NULL, tmp_str);
+		exit_err_malloc(mini, NULL, tmp_str);
 	free(tmp_str);
 	tmp_str = NULL;
 }
 
-void	sort_2dim_arr(char ***arr)
+void	sort_2dim_arr(t_mini *mini, char ***arr)
 {
 	int		i;
 	int		j;
@@ -101,14 +101,14 @@ void	sort_2dim_arr(char ***arr)
 	j = 0;
 	if (!(*arr))
 		return ;
-	size = count_els_2dim_arr(*arr);
+	size = count_els_2dim_arr((*arr));
 	while (i < size)
 	{
 		j = i + 1;
 		while (j < size)
 		{
 			if (ft_strcmp((*arr)[i], (*arr)[j]) > 0)
-				swap_strings(arr, i, j);
+				swap_strings(mini, arr, i, j);
 			++j;
 		}
 		++i;

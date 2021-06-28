@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 19:43:06 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/21 14:15:42 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/28 20:34:36 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
  * only if it is NULL-terminated
 **/
 
-static void	dup_element_and_iter(char ***arr, char **old_arr, int *i)
+static void	dup_element_and_iter(t_mini *mini, char **old_arr, int *i)
 {
-	(*arr)[*i] = ft_strdup(old_arr[*i]);
-	if (!((*arr)[*i]))
-		exit_err_malloc(old_arr, NULL);
+	mini->envs[*i] = ft_strdup(old_arr[*i]);
+	if (!((mini->envs)[*i]))
+		exit_err_malloc(mini, old_arr, NULL);
 	++(*i);
 }
 
-static void	cases_for_realloc(char ***arr, char **old_arr,
+static void	cases_for_realloc(t_mini *mini, char **old_arr,
 								int size_new, int size_old)
 {
 	int	i;
@@ -35,36 +35,36 @@ static void	cases_for_realloc(char ***arr, char **old_arr,
 	if (size_old < size_new)
 	{
 		while (old_arr[i])
-			dup_element_and_iter(arr, old_arr, &i);
+			dup_element_and_iter(mini, old_arr, &i);
 		while (i < size_new)
 		{
-			(*arr)[i] = NULL;
+			mini->envs[i] = NULL;
 			++i;
 		}
 	}
 	else if (size_old > size_new)
 	{
 		while (i < size_new)
-			dup_element_and_iter(arr, old_arr, &i);
+			dup_element_and_iter(mini, old_arr, &i);
 	}
-	(*arr)[i] = NULL;
+	mini->envs[i] = NULL;
 }
 
-void	realloc_2dim_arr(char ***arr, int size_new)
+void	realloc_2dim_arr(t_mini *mini, int size_new)
 {
 	int		size_old;
 	char	**old_arr;
 
-	size_old = count_els_2dim_arr(*arr);
+	size_old = count_els_2dim_arr(mini->envs);
 	if (size_old == size_new)
 		return ;
-	old_arr = copy_2dim_arr(*arr);
-	free_2dim_arr(*arr);
-	*arr = NULL;
-	*arr = (char **)malloc(sizeof(char *) * (size_new + 1));
-	if (!(*arr))
-		exit_err_malloc(old_arr, NULL);
-	cases_for_realloc(arr, old_arr, size_new, size_old);
+	old_arr = copy_2dim_arr(mini->envs);
+	free_2dim_arr(mini->envs);
+	mini->envs = NULL;
+	mini->envs = (char **)malloc(sizeof(char *) * (size_new + 1));
+	if (!(mini->envs))
+		exit_err_malloc(mini, old_arr, NULL);
+	cases_for_realloc(mini, old_arr, size_new, size_old);
 	free_2dim_arr(old_arr);
 	old_arr = NULL;
 }
