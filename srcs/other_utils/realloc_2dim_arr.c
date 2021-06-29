@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 19:43:06 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 20:34:36 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/29 18:53:40 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	dup_element_and_iter(t_mini *mini, char **old_arr, int *i)
 {
 	mini->envs[*i] = ft_strdup(old_arr[*i]);
 	if (!((mini->envs)[*i]))
-		exit_err_malloc(mini, old_arr, NULL);
+		exit_err_malloc_mini(mini, old_arr, NULL);
 	++(*i);
 }
 
@@ -63,7 +63,7 @@ void	realloc_2dim_arr(t_mini *mini, int size_new)
 	mini->envs = NULL;
 	mini->envs = (char **)malloc(sizeof(char *) * (size_new + 1));
 	if (!(mini->envs))
-		exit_err_malloc(mini, old_arr, NULL);
+		exit_err_malloc_mini(mini, old_arr, NULL);
 	cases_for_realloc(mini, old_arr, size_new, size_old);
 	free_2dim_arr(old_arr);
 	old_arr = NULL;

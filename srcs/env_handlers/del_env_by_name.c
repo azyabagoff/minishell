@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 13:45:18 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 19:32:25 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/29 18:51:51 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	copy_without_delited(t_mini *mini, char **old_envs, int ind)
 	{
 		(mini->envs)[j] = ft_strdup(old_envs[i]);
 		if (!(mini->envs)[j])
-			exit_err_malloc(mini, old_envs, NULL);
+			exit_err_malloc_mini(mini, old_envs, NULL);
 		++j;
 		++i;
 	}
@@ -32,7 +32,7 @@ static void	copy_without_delited(t_mini *mini, char **old_envs, int ind)
 	{
 		(mini->envs)[j] = ft_strdup(old_envs[i]);
 		if (!(mini->envs)[j])
-			exit_err_malloc(mini, old_envs, NULL);
+			exit_err_malloc_mini(mini, old_envs, NULL);
 		++j;
 		++i;
 	}

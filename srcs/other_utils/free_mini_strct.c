@@ -6,11 +6,27 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 21:43:33 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 21:44:06 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/29 19:38:24 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	free_els(t_els *els)
+{
+	t_els	*el;
+
+	el = NULL;
+	if (els)
+	{
+		while (els)
+		{
+			el = els->next;
+			free(els);
+			els = el;
+		}
+	}
+}
 
 void	free_els_list(t_mini *mini)
 {
@@ -23,6 +39,8 @@ void	free_els_list(t_mini *mini)
 		{
 			el = mini->start_el->next;
 			free_2dim_arr(mini->start_el->args);
+			if (mini->start_el->file)
+				free(mini->start_el->file);
 			free(mini->start_el);
 			mini->start_el = el;
 		}

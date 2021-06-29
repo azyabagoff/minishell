@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 21:47:04 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/29 21:09:38 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 
 pid_t		g_pid;
 
-// add redir to t_els
-
 typedef struct s_els
 {
 	char			**args;
+	int				redir_type;
+	char			*file;
 	struct s_els	*next;
 }	t_els;
 
@@ -40,6 +40,7 @@ typedef struct s_mini
 	char		**envs;
 	t_els		*start_el;
 	t_els		*els;
+	int			fd[2];
 	long long	status;
 }	t_mini;
 
@@ -48,11 +49,18 @@ void				free_2dim_arr(char **arr);
 int					count_els_2dim_arr(char **arr);
 void				realloc_2dim_arr(t_mini *mini, int size_new);
 void				sort_2dim_arr(t_mini *mini, char ***arr);
-void				exit_err_malloc(t_mini *mini, char **arr, char *str1);
+void				exit_err_malloc_mini(t_mini *mini, char **arr, char *str1);
+void				exit_err_pipe_mini(t_mini *mini, char **arr, char *str1);
+void				exit_err_malloc(char **arr, char *str1);
 void				exit_no_err(t_mini *mini, int ret);
 void				free_mini_strct(t_mini *mini, int free_envs);
+void				free_els(t_els *els);
 void				free_els_list(t_mini *mini);
-char				*get_env(t_mini *mini, char *name);
+void				mini_push_el(t_mini *mini, char **args,
+						int redir_type, char *file);
+void				find_put_status(t_mini *mini, char ***args);
+char				*get_env_mini(t_mini *mini, char *name);
+char				*get_env(char **envs, char *name);
 char				*get_env_name(t_mini *mini, char *env);
 int					check_env_has_val(char *env);
 int					check_env_exists(t_mini *mini, char *name);
@@ -71,10 +79,9 @@ int					ft_exit(t_mini *mini);
 int					cast_status(long long status);
 int					exec_bin(t_mini *mini);
 void				exec_cmd(t_mini *mini);
+void				run_chosen_cmd(t_mini *mini);
 void				execution(t_mini *mini);
-///
-void				mini_push_el(t_mini *mini, char **args);
-t_els				*last_el(t_els *el);
-///
+
+int					exec_redir(t_mini *mini);
 
 #endif

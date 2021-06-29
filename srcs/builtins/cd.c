@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:51:03 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 20:36:36 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/29 20:21:26 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	go_to_path(t_mini *mini, char *path)
 		ft_putstr_fd("\n", 1);
 		return (0);
 	}
-	tmp = get_env(mini, "PWD");
+	tmp = get_env_mini(mini, "PWD");
 	set_env(mini, "OLDPWD", tmp);
 	free(tmp);
 	tmp = NULL;
@@ -41,9 +41,9 @@ static int	go_home_oldpwd(t_mini *mini, int oldpwd)
 	char	*tmp;
 
 	if (!oldpwd)
-		tmp = get_env(mini, "HOME");
+		tmp = get_env_mini(mini, "HOME");
 	else
-		tmp = get_env(mini, "OLDPWD");
+		tmp = get_env_mini(mini, "OLDPWD");
 	if (!tmp)
 	{
 		if (!oldpwd)
@@ -68,7 +68,7 @@ static int	go_from_home(t_mini *mini, char *arg)
 	char	*tmp;
 	int		i;
 
-	tmp = get_env(mini, "HOME");
+	tmp = get_env_mini(mini, "HOME");
 	if (!tmp)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 1);
@@ -77,10 +77,10 @@ static int	go_from_home(t_mini *mini, char *arg)
 	i = 2;
 	tmp = ft__strjoin(tmp, "/");
 	if (!tmp)
-		exit_err_malloc(mini, NULL, NULL);
+		exit_err_malloc_mini(mini, NULL, NULL);
 	tmp = ft__strjoin(tmp, arg + 2);
 	if (!tmp)
-		exit_err_malloc(mini, NULL, NULL);
+		exit_err_malloc_mini(mini, NULL, NULL);
 	if (!go_to_path(mini, tmp))
 	{
 		free(tmp);

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:59:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 21:24:23 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/29 18:53:01 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,8 @@ static int	check_bin_exec(char *path, t_mini *mini)
 	if (folder)
 		closedir(folder);
 	close(fd);
-	g_pid = fork();
-	if (!g_pid)
-		exit_no_err(mini, execve(path, mini->els->args, mini->envs));
-	waitpid(g_pid, &ret, 0);
-	return (ret / 256);
+	exit_no_err(mini, execve(path, mini->els->args, mini->envs));
+	return (0);
 }
 
 static int	join_path_to_cmd(t_mini *mini, char **path)
@@ -102,19 +99,19 @@ static int	join_path_to_cmd(t_mini *mini, char **path)
 	path_env = NULL;
 	dirs = NULL;
 	dir = NULL;
-	path_env = get_env(mini, "PATH");
+	path_env = get_env_mini(mini, "PATH");
 	if (!path_env)
 		return (print_errs_126_127(1, mini->els->args[0], NULL));
 	dirs = ft_split(path_env, ':');
 	if (!dirs)
-		exit_err_malloc(mini, NULL, path_env);
+		exit_err_malloc_mini(mini, NULL, path_env);
 	free(path_env);
 	dir = find_cmd_dir(dirs, mini->els->args[0]);
 	if (!dir)
 		return (print_errs_126_127(3, mini->els->args[0], dirs));
 	*path = ft_strjoin(dir, "/");
 	if (!(*path))
-		exit_err_malloc(mini, dirs, NULL);
+		exit_err_malloc_mini(mini, dirs, NULL);
 	free_2dim_arr(dirs);
 	*path = ft__strjoin(*path, mini->els->args[0]);
 	return (-1);

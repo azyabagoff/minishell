@@ -6,17 +6,11 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:18:56 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 20:45:00 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/29 19:17:19 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/**
- * Functions in this file work correctly
- * with a 2 dimensional array
- * only if it is NULL-terminated
-**/
 
 void	free_2dim_arr(char **arr)
 {
@@ -76,17 +70,17 @@ static void	swap_strings(t_mini *mini, char ***arr, int i, int j)
 
 	tmp_str = ft_strdup((*arr)[i]);
 	if (!tmp_str)
-		exit_err_malloc(mini, NULL, NULL);
+		exit_err_malloc_mini(mini, NULL, NULL);
 	free((*arr)[i]);
 	(*arr)[i] = NULL;
 	(*arr)[i] = ft_strdup((*arr)[j]);
 	if (!(*arr)[i])
-		exit_err_malloc(mini, NULL, tmp_str);
+		exit_err_malloc_mini(mini, NULL, tmp_str);
 	free((*arr)[j]);
 	(*arr)[j] = NULL;
 	(*arr)[j] = ft_strdup(tmp_str);
 	if (!(*arr)[j])
-		exit_err_malloc(mini, NULL, tmp_str);
+		exit_err_malloc_mini(mini, NULL, tmp_str);
 	free(tmp_str);
 	tmp_str = NULL;
 }

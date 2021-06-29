@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   find_put_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/27 14:35:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/29 22:01:54 by sesnowbi         ###   ########.fr       */
+/*   Created: 2021/06/29 20:32:20 by sesnowbi          #+#    #+#             */
+/*   Updated: 2021/06/29 20:39:09 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	execution(t_mini *mini)
+void	find_put_status(t_mini *mini, char ***args)//добавить в аргументы викину структуру
 {
-	while (mini->els)
+	int	j;
+
+	j = 0;
+	while (*args && (*args)[j])
 	{
-		if (!mini->els->redir_type)//заменю на проверку на налл в пуш елемент из викиной структуры
-			exec_cmd(mini);
-		else
-			exec_redir(mini);
-		mini->els = mini->els->next;
+		if (!ft_strcmp((*args)[j], "$?"))
+		{
+			free((*args)[j]);
+			(*args)[j] = ft_strdup(ft_lltoa(mini->status));
+			if (!(*args)[j])
+			{
+				//очистка викиной структуры
+				exit_err_malloc_mini(mini, NULL, NULL);
+			}
+		}
+		++j;
 	}
-	free_mini_strct(mini, 0);
 }
