@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:51:03 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/29 20:21:26 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/30 21:35:07 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static int	go_to_path(t_mini *mini, char *path)
 
 	if (chdir(path) == -1)
 	{
-		ft_putstr_fd("minishell: cd: ", 1);
-		ft_putstr_fd(path, 1);
-		ft_putstr_fd(": ", 1);
-		ft_putstr_fd(strerror(errno), 1);
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 		return (0);
 	}
 	tmp = get_env_mini(mini, "PWD");
@@ -47,9 +47,9 @@ static int	go_home_oldpwd(t_mini *mini, int oldpwd)
 	if (!tmp)
 	{
 		if (!oldpwd)
-			ft_putstr_fd("minishell: cd: HOME not set\n", 1);
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		else
-			ft_putstr_fd("minishell: cd: OLDPWD not set\n", 1);
+			ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
 		return (0);
 	}
 	if (!go_to_path(mini, tmp))
@@ -71,7 +71,7 @@ static int	go_from_home(t_mini *mini, char *arg)
 	tmp = get_env_mini(mini, "HOME");
 	if (!tmp)
 	{
-		ft_putstr_fd("minishell: cd: HOME not set\n", 1);
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		return (0);
 	}
 	i = 2;
@@ -130,14 +130,14 @@ int	ft_cd(t_mini *mini)
 		return (0);
 	if (mini->els->args[1] && !ft_strncmp(mini->els->args[1], "-/", 2))
 	{
-		ft_putstr_fd("minishell: cd: -/: invalid option\n", 1);
-		ft_putstr_fd("cd: usage: cd [dir]\n", 1);
+		ft_putstr_fd("minishell: cd: -/: invalid option\n", 2);
+		ft_putstr_fd("cd: usage: cd [dir]\n", 2);
 		return (1);
 	}
 	else if (mini->els->args[1] && !ft_strncmp(mini->els->args[1], "--/", 3))
 	{
-		ft_putstr_fd("minishell: cd: --: invalid option\n", 1);
-		ft_putstr_fd("cd: usage: cd [dir]\n", 1);
+		ft_putstr_fd("minishell: cd: --: invalid option\n", 2);
+		ft_putstr_fd("cd: usage: cd [dir]\n", 2);
 		return (0);
 	}
 	else

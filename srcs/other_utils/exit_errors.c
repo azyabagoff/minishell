@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 13:24:24 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/29 21:08:35 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/30 21:41:50 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exit_err_malloc_mini(t_mini *mini, char **arr, char *str1)
 	free_2dim_arr(arr);
 	if (str1)
 		free(str1);
-	ft_putstr_fd("Error.\nMalloc error.\n", 1);
+	ft_putstr_fd("Error.\nMalloc error.\n", 2);
 	mini->status = 1;
 	exit(1);
 }
@@ -29,7 +29,7 @@ void	exit_err_pipe_mini(t_mini *mini, char **arr, char *str1)
 	free_2dim_arr(arr);
 	if (str1)
 		free(str1);
-	ft_putstr_fd("Error.\nPipe error.\n", 1);
+	ft_putstr_fd("Error.\nPipe error.\n", 2);
 	mini->status = 1;
 	exit(1);
 }
@@ -39,7 +39,7 @@ void	exit_err_malloc(char **arr, char *str1)
 	free_2dim_arr(arr);
 	if (str1)
 		free(str1);
-	ft_putstr_fd("Error.\nMalloc error.\n", 1);
+	ft_putstr_fd("Error.\nMalloc error.\n", 2);
 	exit(1);
 }
 

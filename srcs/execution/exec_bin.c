@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:59:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/29 18:53:01 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/30 21:40:41 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,25 @@ static char	*find_cmd_dir(char **dirs, char *cmd)
 
 static int	print_errs_126_127(int num_err, char *path, char **dirs)
 {
-	ft_putstr_fd("minishell: ", 1);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(path, 1);
 	if (num_err == 1)
 	{
 		if (!ft_strcmp(strerror(errno), "Not a directory"))
-			ft_putendl_fd(": Premission denied", 1);
+			ft_putendl_fd(": Premission denied", 2);
 		else
-			ft_putendl_fd(": No such file or directory", 1);
+			ft_putendl_fd(": No such file or directory", 2);
 		return (127);
 	}
 	else if (num_err == 2)
 	{
-		ft_putendl_fd(": is a directory", 1);
+		ft_putendl_fd(": is a directory", 2);
 		return (126);
 	}
 	else if (num_err == 3)
 	{
 		free_2dim_arr(dirs);
-		ft_putstr_fd(": command not found\n", 1);
+		ft_putstr_fd(": command not found\n", 2);
 		return (127);
 	}
 	return (-1);

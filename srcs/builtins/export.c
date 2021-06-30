@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:19:32 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 20:45:40 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/30 22:30:20 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static void	check_id_set_env(t_mini *mini, int i)
 	name = get_env_name(mini, mini->els->args[i]);
 	if (!check_correct_id(name))
 	{
-		ft_putstr_fd("minishell: export: `", 1);
-		ft_putstr_fd(mini->els->args[i], 1);
-		ft_putstr_fd("': not a valid identifier\n", 1);
+		ft_putstr_fd("minishell: export: `", 2);
+		ft_putstr_fd(mini->els->args[i], 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:08:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 20:24:34 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/30 21:36:11 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_env(t_mini *mini)
 	if (mini->els->args[1])
 	{
 		ft_putstr_fd(
-			"minishell: env: arguments and options are not supported\n", 1);
+			"minishell: env: arguments and options are not supported\n", 2);
 		return (1);
 	}
 	print_envs(mini->envs, 0);

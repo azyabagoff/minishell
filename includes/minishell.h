@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/29 21:09:38 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/30 21:53:55 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ typedef struct s_els
 typedef struct s_mini
 {
 	char		**envs;
+	int			n_els;
+	int			n_els_left;
 	t_els		*start_el;
 	t_els		*els;
-	int			fd[2];
+	int			**fd;
+	int			cmd_ind;
 	long long	status;
 }	t_mini;
 
@@ -56,6 +59,7 @@ void				exit_no_err(t_mini *mini, int ret);
 void				free_mini_strct(t_mini *mini, int free_envs);
 void				free_els(t_els *els);
 void				free_els_list(t_mini *mini);
+void				free_fds_arr(t_mini *mini);
 void				mini_push_el(t_mini *mini, char **args,
 						int redir_type, char *file);
 void				find_put_status(t_mini *mini, char ***args);
@@ -81,7 +85,8 @@ int					exec_bin(t_mini *mini);
 void				exec_cmd(t_mini *mini);
 void				run_chosen_cmd(t_mini *mini);
 void				execution(t_mini *mini);
-
+void				malloc_fds(t_mini *mini, int n_els, int i, int tmp);
+void				close_all_fds(t_mini *mini);
 int					exec_redir(t_mini *mini);
 
 #endif

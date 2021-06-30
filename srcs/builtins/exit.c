@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:38:43 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/28 21:39:07 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/06/30 21:38:04 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,17 @@ int	ft_exit(t_mini *mini)
 		if (!is_numeric(mini->els->args[1])
 			|| !belongs_long_long(mini->els->args[1]))
 		{
-			ft_putstr_fd("minishell: exit: ", 1);
-			ft_putstr_fd(mini->els->args[1], 1);
-			ft_putstr_fd(": numeric argument required\n", 1);
+			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd(mini->els->args[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
 			mini->status = 255;
 		}
 		else
 		{
 			if (mini->els->args[2])
 			{
-				ft_putstr_fd("minishell: exit: ", 1);
-				ft_putstr_fd(": too many arguments\n", 1);
+				ft_putstr_fd("minishell: exit: ", 2);
+				ft_putstr_fd(": too many arguments\n", 2);
 				return (1);
 			}
 			mini->status = ft_atoll(mini->els->args[1]);
