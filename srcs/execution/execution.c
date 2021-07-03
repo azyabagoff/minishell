@@ -6,36 +6,45 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:35:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/30 22:16:02 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/01 16:15:19 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+void	exec_cmd(t_mini *mini)
+{
+	if (!ft_strcmp(mini->els->args[0], "echo"))
+		mini->status = ft_echo(mini->els->args);
+	else if (!ft_strcmp(mini->els->args[0], "cd"))
+		mini->status = ft_cd(mini);
+	else if (!ft_strcmp(mini->els->args[0], "pwd"))
+		mini->status = ft_pwd();
+	else if (!ft_strcmp(mini->els->args[0], "export"))
+		mini->status = ft_export(mini);
+	else if (!ft_strcmp(mini->els->args[0], "unset"))
+		mini->status = ft_unset(mini);
+	else if (!ft_strcmp(mini->els->args[0], "env"))
+		mini->status = ft_env(mini);
+	else if (!ft_strcmp(mini->els->args[0], "exit"))
+		mini->status = ft_exit(mini);
+	else
+		mini->status = exec_bin(mini);
+}
+
 void	execution(t_mini *mini)
 {
-	int	i;
-	int	ret;
-
-	i = 0;
-	ret = 0;
-	while (i < mini->n_els - 1)
+	if (mini->n_els > 1)
+		exec_pipe(mini);
+	else
 	{
-		if (pipe(mini->fd[i]) == -1)
-			exit_err_pipe_mini(mini, NULL, NULL);
-		++i;
+		while (mini->els)
+		{
+			if (!mini->els->redir_type)//заменю на проверку на налл в пуш елемент из викиной структуры
+				exec_cmd(mini);
+			else
+				exec_redir(mini);
+			mini->els = mini->els->next;
+		}
 	}
-	while (mini->els)
-	{
-		if (!mini->els->redir_type)//заменю на проверку на налл в пуш елемент из викиной структуры
-			exec_cmd(mini);
-		else
-			exec_redir(mini);
-		--mini->n_els_left;
-		++mini->cmd_ind;
-		mini->els = mini->els->next;
-	}
-	close_all_fds(mini);
-	waitpid(g_pid, &ret, 0);
-	mini->status = ret / 256;
 }

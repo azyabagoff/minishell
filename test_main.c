@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 20:53:11 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/30 21:45:26 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/01 16:07:14 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char *argv[], char *envp[])
 	line = NULL;
 	i = 0;
 	mini.envs = copy_2dim_arr(envp);
+	change_shlvl(&mini);
+	del_uninit_envs(&mini);
 	mini.status = 0;
 	mini.n_els = 0;
 	mini.n_els_left = 0;

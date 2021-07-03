@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_bin.c                                         :+:      :+:    :+:   */
+/*   exec_bin_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:59:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/03 15:33:24 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/03 15:32:20 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,8 @@ static int	check_bin_exec(char *path, t_mini *mini)
 	if (folder)
 		closedir(folder);
 	close(fd);
-	g_pid = fork();
-	if (!g_pid)
-		exit_no_err(mini, execve(path, mini->els->args, mini->envs));
-	waitpid(g_pid, &ret, 0);
-	return (ret / 256);
+	exit_no_err(mini, execve(path, mini->els->args, mini->envs));
+	return (0);
 }
 
 static int	join_path_to_cmd(t_mini *mini, char **path)
@@ -120,7 +117,7 @@ static int	join_path_to_cmd(t_mini *mini, char **path)
 	return (-1);
 }
 
-int	exec_bin(t_mini *mini)
+int	exec_bin_pipe(t_mini *mini)
 {
 	char	*path;
 	int		check;

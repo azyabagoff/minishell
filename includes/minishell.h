@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/30 21:53:55 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/01 16:11:30 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 
 pid_t		g_pid;
 
@@ -63,6 +64,7 @@ void				free_fds_arr(t_mini *mini);
 void				mini_push_el(t_mini *mini, char **args,
 						int redir_type, char *file);
 void				find_put_status(t_mini *mini, char ***args);
+void				change_shlvl(t_mini *mini);
 char				*get_env_mini(t_mini *mini, char *name);
 char				*get_env(char **envs, char *name);
 char				*get_env_name(t_mini *mini, char *env);
@@ -82,8 +84,11 @@ void				print_envs(char **envs, int uninit);
 int					ft_exit(t_mini *mini);
 int					cast_status(long long status);
 int					exec_bin(t_mini *mini);
+int					exec_bin_pipe(t_mini *mini);
+void				exec_cmd_pipe(t_mini *mini);
+void				exec_pipe(t_mini *mini);
 void				exec_cmd(t_mini *mini);
-void				run_chosen_cmd(t_mini *mini);
+void				run_chosen_cmd_pipe(t_mini *mini);
 void				execution(t_mini *mini);
 void				malloc_fds(t_mini *mini, int n_els, int i, int tmp);
 void				close_all_fds(t_mini *mini);
