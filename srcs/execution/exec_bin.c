@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:59:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/03 15:33:24 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 00:06:01 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,15 @@ static int	check_bin_exec(char *path, t_mini *mini)
 	if (folder)
 		closedir(folder);
 	close(fd);
-	g_pid = fork();
-	if (!g_pid)
+	mini->pid = fork();
+	if (!mini->pid)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		exit_no_err(mini, execve(path, mini->els->args, mini->envs));
-	waitpid(g_pid, &ret, 0);
-	return (ret / 256);
+	}
+	waitpid(mini->pid, &ret, 0);
+	return (ret_stat_termsig(ret));
 }
 
 static int	join_path_to_cmd(t_mini *mini, char **path)
@@ -116,7 +120,7 @@ static int	join_path_to_cmd(t_mini *mini, char **path)
 	if (!(*path))
 		exit_err_malloc_mini(mini, dirs, NULL);
 	free_2dim_arr(dirs);
-	*path = ft__strjoin(*path, mini->els->args[0]);
+	*path = ft_strjoin_mini(*path, mini->els->args[0]);
 	return (-1);
 }
 

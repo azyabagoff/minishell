@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 17:22:34 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/29 18:52:47 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/05 20:43:30 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	set_env_name_val1(t_mini *mini, char *name,
 		exit_err_malloc_mini(mini, NULL, NULL);
 	if (*value)
 	{
-		tmp_val = ft__strjoin(tmp_val, value);
+		tmp_val = ft_strjoin_mini(tmp_val, value);
 		if (!tmp_val)
 			exit_err_malloc_mini(mini, NULL, NULL);
 	}
@@ -55,7 +55,7 @@ static void	set_env_name_val2(t_mini *mini, char *name, char *value, int ind)
 		exit_err_malloc_mini(mini, NULL, NULL);
 	if (*value)
 	{
-		tmp_val = ft__strjoin(tmp_val, value);
+		tmp_val = ft_strjoin_mini(tmp_val, value);
 		if (!tmp_val)
 			exit_err_malloc_mini(mini, NULL, NULL);
 	}

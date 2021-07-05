@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 21:43:33 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/01 15:14:49 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/05 21:50:25 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	free_fds_arr(t_mini *mini)
 	mini->fd = NULL;
 }
 
-void	free_mini_strct(t_mini *mini, int free_envs)
+void	free_mini_strct(t_mini *mini, int free_envs, int free_echo_n)
 {
 	if (free_envs)
 	{
@@ -74,6 +74,13 @@ void	free_mini_strct(t_mini *mini, int free_envs)
 	}
 	close_all_fds(mini);
 	free_fds_arr(mini);
+	if (free_echo_n == 2)
+	{
+		if (mini->echo_n)
+			free(mini->echo_n);
+		mini->fl_echo_n = 0;
+		mini->echo_n = NULL;
+	}
 	mini->cmd_ind = 0;
 	mini->n_els = 0;
 	mini->n_els_left = 0;

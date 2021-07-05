@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:23:01 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/29 19:38:59 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:43:57 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,11 @@ void	mini_push_el(t_mini *mini, char **args, int redir_type, char *file)
 		mini->els = neww;
 		neww->next = NULL;
 	}
+}
+
+t_mini	*ret_mini(void)
+{
+	static t_mini	mini;
+
+	return (&mini);
 }

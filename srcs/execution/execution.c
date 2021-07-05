@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:35:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/01 16:15:19 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/05 21:07:13 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exec_cmd(t_mini *mini)
 {
 	if (!ft_strcmp(mini->els->args[0], "echo"))
-		mini->status = ft_echo(mini->els->args);
+		mini->status = ft_echo(mini, mini->els->args);
 	else if (!ft_strcmp(mini->els->args[0], "cd"))
 		mini->status = ft_cd(mini);
 	else if (!ft_strcmp(mini->els->args[0], "pwd"))

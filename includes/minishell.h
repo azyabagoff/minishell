@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/01 16:11:30 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 00:03:11 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-# include "../GNL/get_next_line.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -25,8 +24,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
-
-pid_t		g_pid;
+# include <termios.h>
 
 typedef struct s_els
 {
@@ -38,6 +36,8 @@ typedef struct s_els
 
 typedef struct s_mini
 {
+	pid_t		pid;
+	long long	status;
 	char		**envs;
 	int			n_els;
 	int			n_els_left;
@@ -45,9 +45,12 @@ typedef struct s_mini
 	t_els		*els;
 	int			**fd;
 	int			cmd_ind;
-	long long	status;
+	char		*echo_n;
+	int			fl_echo_n;
 }	t_mini;
 
+t_mini				*ret_mini(void);
+void				rl_replace_line (const char *text, int clear_undo);
 char				**copy_2dim_arr(char **arr);
 void				free_2dim_arr(char **arr);
 int					count_els_2dim_arr(char **arr);
@@ -57,13 +60,15 @@ void				exit_err_malloc_mini(t_mini *mini, char **arr, char *str1);
 void				exit_err_pipe_mini(t_mini *mini, char **arr, char *str1);
 void				exit_err_malloc(char **arr, char *str1);
 void				exit_no_err(t_mini *mini, int ret);
-void				free_mini_strct(t_mini *mini, int free_envs);
+void				free_mini_strct(t_mini *mini, int free_envs,
+						int free_echo_n);
 void				free_els(t_els *els);
 void				free_els_list(t_mini *mini);
 void				free_fds_arr(t_mini *mini);
 void				mini_push_el(t_mini *mini, char **args,
 						int redir_type, char *file);
 void				find_put_status(t_mini *mini, char ***args);
+char				*ft_strjoin_mini(char *s1, char *s2);
 void				change_shlvl(t_mini *mini);
 char				*get_env_mini(t_mini *mini, char *name);
 char				*get_env(char **envs, char *name);
@@ -73,7 +78,7 @@ int					check_env_exists(t_mini *mini, char *name);
 void				set_env(t_mini *mini, char *name, char *value);
 void				del_env_by_name(t_mini *mini, char *name);
 void				del_uninit_envs(t_mini *mini);
-int					ft_echo(char **args);
+int					ft_echo(t_mini *mini, char **args);
 int					ft_cd(t_mini *mini);
 int					ft_pwd(void);
 int					ft_export(t_mini *mini);
@@ -92,6 +97,8 @@ void				run_chosen_cmd_pipe(t_mini *mini);
 void				execution(t_mini *mini);
 void				malloc_fds(t_mini *mini, int n_els, int i, int tmp);
 void				close_all_fds(t_mini *mini);
+void				signal_handler(int sig_num);
+int					ret_stat_termsig(int ret);
 int					exec_redir(t_mini *mini);
 
 #endif

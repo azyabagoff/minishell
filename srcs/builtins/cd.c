@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:51:03 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/30 21:35:07 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/05 20:43:05 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ static int	go_from_home(t_mini *mini, char *arg)
 		return (0);
 	}
 	i = 2;
-	tmp = ft__strjoin(tmp, "/");
+	tmp = ft_strjoin_mini(tmp, "/");
 	if (!tmp)
 		exit_err_malloc_mini(mini, NULL, NULL);
-	tmp = ft__strjoin(tmp, arg + 2);
+	tmp = ft_strjoin_mini(tmp, arg + 2);
 	if (!tmp)
 		exit_err_malloc_mini(mini, NULL, NULL);
 	if (!go_to_path(mini, tmp))

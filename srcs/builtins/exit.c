@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:38:43 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/30 21:38:04 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/05 21:34:20 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	belongs_long_long(char *str)
 int	ft_exit(t_mini *mini)
 {
 	ft_putstr_fd("exit\n", 1);
-	if (mini->els->args && mini->els->args[1])
+	if (mini->els && mini->els->args && mini->els->args[1])
 	{
 		if (!is_numeric(mini->els->args[1])
 			|| !belongs_long_long(mini->els->args[1]))
@@ -84,6 +84,6 @@ int	ft_exit(t_mini *mini)
 			mini->status = ft_atoll(mini->els->args[1]);
 		}
 	}
-	free_mini_strct(mini, 1);
+	free_mini_strct(mini, 1, 2);
 	exit(cast_status(mini->status));
 }
