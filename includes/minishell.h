@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 00:03:11 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 12:23:11 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void				print_envs(char **envs, int uninit);
 int					ft_exit(t_mini *mini);
 int					cast_status(long long status);
 int					exec_bin(t_mini *mini);
+void				fork_for_exec_bin_c(t_mini *mini, char *path);
 int					exec_bin_pipe(t_mini *mini);
 void				exec_cmd_pipe(t_mini *mini);
 void				exec_pipe(t_mini *mini);

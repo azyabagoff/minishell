@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 13:14:37 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 00:05:56 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 12:10:37 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	exec_cmd_pipe(t_mini *mini)
 		return ;
 	else
 	{
+		signal(SIGINT, SIG_IGN);
 		mini->pid = fork();
 		if (!mini->pid)
 		{
@@ -76,6 +77,7 @@ static void	wait_children(t_mini *mini, int *ret)
 	}
 	else
 		mini->status = *ret / 256;
+	signal(SIGINT, signal_handler);
 }
 
 void	exec_pipe(t_mini *mini)

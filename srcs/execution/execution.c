@@ -6,11 +6,22 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:35:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/05 21:07:13 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 12:23:57 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	fork_for_exec_bin_c(t_mini *mini, char *path)
+{
+	mini->pid = fork();
+	if (!mini->pid)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		exit_no_err(mini, execve(path, mini->els->args, mini->envs));
+	}
+}
 
 void	exec_cmd(t_mini *mini)
 {

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:59:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 00:06:01 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 12:24:26 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,10 @@ static int	check_bin_exec(char *path, t_mini *mini)
 	if (folder)
 		closedir(folder);
 	close(fd);
-	mini->pid = fork();
-	if (!mini->pid)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		exit_no_err(mini, execve(path, mini->els->args, mini->envs));
-	}
+	signal(SIGINT, SIG_IGN);
+	fork_for_exec_bin_c(mini, path);
 	waitpid(mini->pid, &ret, 0);
+	signal(SIGINT, signal_handler);
 	return (ret_stat_termsig(ret));
 }
 
