@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 20:40:16 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/05 20:44:39 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:09:21 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-char	*ft_strjoin_mini(char *s1, char *s2)
+char	*ft_strjoin1(char *s1, char *s2)
 {
 	char		*new;
 	char		*tmp;

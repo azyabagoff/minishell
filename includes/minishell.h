@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 12:23:11 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:52:40 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,18 @@
 # include <signal.h>
 # include <termios.h>
 
+typedef struct s_redir
+{
+	int				r_type;
+	int				redir_fd;
+	char			*file;
+	struct s_redir	*next;
+}	t_redir;
+
 typedef struct s_els
 {
 	char			**args;
-	int				redir_type;
-	char			*file;
+	t_redir			*redir;
 	struct s_els	*next;
 }	t_els;
 
@@ -43,6 +50,7 @@ typedef struct s_mini
 	int			n_els_left;
 	t_els		*start_el;
 	t_els		*els;
+	int			in_out_fds[2];
 	int			**fd;
 	int			cmd_ind;
 	char		*echo_n;
@@ -65,10 +73,9 @@ void				free_mini_strct(t_mini *mini, int free_envs,
 void				free_els(t_els *els);
 void				free_els_list(t_mini *mini);
 void				free_fds_arr(t_mini *mini);
-void				mini_push_el(t_mini *mini, char **args,
-						int redir_type, char *file);
+void				mini_push_el(t_mini *mini, char **args);
+t_els				*last_el(t_els *el);
 void				find_put_status(t_mini *mini, char ***args);
-char				*ft_strjoin_mini(char *s1, char *s2);
 void				change_shlvl(t_mini *mini);
 char				*get_env_mini(t_mini *mini, char *name);
 char				*get_env(char **envs, char *name);

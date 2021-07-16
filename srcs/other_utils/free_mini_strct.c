@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 21:43:33 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/05 21:50:25 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/16 19:03:34 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	free_els_list(t_mini *mini)
 		{
 			el = mini->start_el->next;
 			free_2dim_arr(mini->start_el->args);
-			if (mini->start_el->file)
-				free(mini->start_el->file);
+			free(mini->start_el->redir);//free_redirs_list(mini);////////////
 			free(mini->start_el);
 			mini->start_el = el;
 		}
@@ -52,14 +51,17 @@ void	free_fds_arr(t_mini *mini)
 	int	i;
 
 	i = 0;
-	while (i < mini->n_els - 1)
+	if (mini->fd)
 	{
-		free(mini->fd[i]);
-		mini->fd[i] = NULL;
-		++i;
+		while (i < mini->n_els - 1)
+		{
+			free(mini->fd[i]);
+			mini->fd[i] = NULL;
+			++i;
+		}
+		free(mini->fd);
+		mini->fd = NULL;
 	}
-	free(mini->fd);
-	mini->fd = NULL;
 }
 
 void	free_mini_strct(t_mini *mini, int free_envs, int free_echo_n)
@@ -72,6 +74,8 @@ void	free_mini_strct(t_mini *mini, int free_envs, int free_echo_n)
 			mini->envs = NULL;
 		}
 	}
+	close(mini->in_out_fds[0]);
+	close(mini->in_out_fds[1]);
 	close_all_fds(mini);
 	free_fds_arr(mini);
 	if (free_echo_n == 2)

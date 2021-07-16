@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 13:14:37 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 12:10:37 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/16 19:13:09 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void	exec_cmd_pipe(t_mini *mini)
 				dup2(mini->fd[mini->cmd_ind - 1][0], 0);
 			if (mini->els->next)
 				dup2(mini->fd[mini->cmd_ind][1], 1);
+			if (mini->els->redir->r_type != 0)
+				exec_redir(mini);
+			close(mini->in_out_fds[0]);
+			close(mini->in_out_fds[1]);
 			close_all_fds(mini);
 			run_chosen_cmd_pipe(mini);
 		}
@@ -95,14 +99,13 @@ void	exec_pipe(t_mini *mini)
 	}
 	while (mini->els)
 	{
-		if (!mini->els->redir_type)//заменю на проверку на налл в пуш елемент из викиной структуры
-			exec_cmd_pipe(mini);
-		else
-			exec_redir(mini);
+		exec_cmd_pipe(mini);
 		--mini->n_els_left;
 		++mini->cmd_ind;
 		mini->els = mini->els->next;
 	}
+	close(mini->in_out_fds[0]);
+	close(mini->in_out_fds[1]);
 	close_all_fds(mini);
 	wait_children(mini, &ret);
 }

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 19:55:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/05 21:29:27 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:12:10 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	remember_echo_n(t_mini *mini, char *str, int *flag)
 {
 	if (*flag == 1)
 	{
-		mini->echo_n = ft_strjoin_mini(mini->echo_n, " ");
+		mini->echo_n = ft_strjoin1(mini->echo_n, " ");
 		if (!mini->echo_n)
 			exit_err_malloc_mini(mini, NULL, NULL);
-		mini->echo_n = ft_strjoin_mini(mini->echo_n, str);
+		mini->echo_n = ft_strjoin1(mini->echo_n, str);
 		if (!mini->echo_n)
 			exit_err_malloc_mini(mini, NULL, NULL);
 	}
@@ -40,7 +40,7 @@ static void	echo_cases(t_mini *mini, char *str, int *flag, int i)
 	else if (i == 2 && *flag)
 	{
 		ft_putstr_fd(str, 1);
-		mini->echo_n = ft_strjoin_mini(mini->echo_n, str);
+		mini->echo_n = ft_strjoin1(mini->echo_n, str);
 		if (!mini->echo_n)
 			exit_err_malloc_mini(mini, NULL, NULL);
 	}

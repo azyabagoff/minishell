@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 20:53:11 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 00:02:38 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/16 16:58:08 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			args1 = ft_split(args[i], ' ');////
 			find_put_status(mini, &args1);
-			mini_push_el(mini, args1, 0, NULL);
+			mini_push_el(mini, args1);//добавить в функцию инициализацию редиректов
 			++mini->n_els;
 			free_2dim_arr(args1);
 			args1 = NULL;
@@ -84,9 +84,11 @@ int	main(int argc, char *argv[], char *envp[])
 		free_2dim_arr(args);//заменить на очистку викиной структуры
 		args = NULL;
 		malloc_fds(mini, mini->n_els, 0, 0);
+		mini->in_out_fds[0] = dup(0);
+		mini->in_out_fds[1] = dup(1);
 		mini->start_el = mini->els;
 		execution(mini);
-		free_mini_strct(mini, 0, mini->fl_echo_n);
+		free_mini_strct(mini, 0, mini->fl_echo_n);//добавить в функцию очистку редиректов
 	}
 	return (0);
 }

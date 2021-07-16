@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:59:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/05 20:43:35 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:13:07 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static int	join_path_to_cmd(t_mini *mini, char **path)
 	if (!(*path))
 		exit_err_malloc_mini(mini, dirs, NULL);
 	free_2dim_arr(dirs);
-	*path = ft_strjoin_mini(*path, mini->els->args[0]);
+	*path = ft_strjoin1(*path, mini->els->args[0]);
 	return (-1);
 }
 

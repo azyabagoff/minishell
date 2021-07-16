@@ -6,7 +6,7 @@
 #    By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/07 18:33:46 by sesnowbi          #+#    #+#              #
-#    Updated: 2021/06/18 20:23:51 by sesnowbi         ###   ########.fr        #
+#    Updated: 2021/07/06 14:09:03 by sesnowbi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS	= ft_memset.c \
 		  ft_strdup.c \
 		  ft_substr.c \
 		  ft_strjoin.c \
+		  ft_strjoin1.c \
 		  ft_strtrim.c \
 		  ft_split.c \
 		  ft_itoa.c \

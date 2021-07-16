@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:35:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 12:23:57 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/16 14:56:11 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@ void	execution(t_mini *mini)
 	{
 		while (mini->els)
 		{
-			if (!mini->els->redir_type)//заменю на проверку на налл в пуш елемент из викиной структуры
-				exec_cmd(mini);
-			else
+			if (mini->els->redir->r_type != 0)
+			{
 				exec_redir(mini);
+				close(mini->in_out_fds[0]);
+				close(mini->in_out_fds[1]);
+			}
+			exec_cmd(mini);
 			mini->els = mini->els->next;
 		}
 	}
