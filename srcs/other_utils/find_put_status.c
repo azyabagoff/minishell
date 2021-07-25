@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:32:20 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/05 20:22:42 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/25 19:26:14 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	find_put_status(t_mini *mini, char ***args)//добавить в аргументы викину структуру
 {
-	int	j;
+	int		j;
 
 	j = 0;
 	while (*args && (*args)[j])
@@ -22,7 +22,7 @@ void	find_put_status(t_mini *mini, char ***args)//добавить в аргум
 		if (!ft_strcmp((*args)[j], "$?"))
 		{
 			free((*args)[j]);
-			(*args)[j] = ft_strdup(ft_lltoa(mini->status));
+			(*args)[j] = ft_lltoa(mini->status);
 			if (!(*args)[j])
 			{
 				//очистка викиной структуры
@@ -31,4 +31,21 @@ void	find_put_status(t_mini *mini, char ***args)//добавить в аргум
 		}
 		++j;
 	}
+}
+
+void	status_check(t_redir *red)
+{
+	struct stat	buff;
+
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(red->file, 2);
+	if (!stat(red->file, &buff))
+	{
+		if (buff.st_mode & S_IFDIR)
+			ft_putendl_fd(": Is a directory", 2);
+		else
+			ft_putendl_fd(": Permission denied", 2);
+	}
+	else
+		ft_putendl_fd(": No such file or directory", 2);
 }

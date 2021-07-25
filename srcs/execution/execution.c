@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:35:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/16 14:56:11 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/25 17:53:52 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	exec_cmd(t_mini *mini)
 
 void	execution(t_mini *mini)
 {
+	int	block_cmd;
+
+	block_cmd = 0;
 	if (mini->n_els > 1)
 		exec_pipe(mini);
 	else
@@ -53,11 +56,15 @@ void	execution(t_mini *mini)
 		{
 			if (mini->els->redir->r_type != 0)
 			{
-				exec_redir(mini);
-				close(mini->in_out_fds[0]);
-				close(mini->in_out_fds[1]);
+				if (!exec_redir(mini))
+					block_cmd = 1;
 			}
-			exec_cmd(mini);
+			dup2(mini->in_out_fds[0], 0);
+			dup2(mini->in_out_fds[1], 1);
+			close(mini->in_out_fds[0]);
+			close(mini->in_out_fds[1]);
+			if (!block_cmd)
+				exec_cmd(mini);
 			mini->els = mini->els->next;
 		}
 	}

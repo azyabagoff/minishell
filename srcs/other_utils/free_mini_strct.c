@@ -6,11 +6,37 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 21:43:33 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/16 19:03:34 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/24 18:47:26 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	free_redirs_list(t_mini *mini)
+{
+	t_redir	*tmp;
+	t_redir	*tmp1;
+
+	tmp = NULL;
+	tmp1 = NULL;
+	if (mini && mini->start_el && mini->start_el->redir
+		&& mini->start_el->redir->r_type != 0)
+		tmp = mini->start_el->redir;
+	else
+	{
+		if (mini && mini->start_el && mini->start_el->redir)
+			free(mini->start_el->redir);
+		return ;
+	}
+	while (tmp)
+	{
+		tmp1 = tmp->next;
+		if (tmp->file)
+			free(tmp->file);
+		free(tmp);
+		tmp = tmp1;
+	}
+}
 
 void	free_els(t_els *els)
 {
@@ -39,7 +65,7 @@ void	free_els_list(t_mini *mini)
 		{
 			el = mini->start_el->next;
 			free_2dim_arr(mini->start_el->args);
-			free(mini->start_el->redir);//free_redirs_list(mini);////////////
+			free_redirs_list(mini);
 			free(mini->start_el);
 			mini->start_el = el;
 		}

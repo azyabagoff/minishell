@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:23:01 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/16 18:00:03 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/25 19:28:21 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,38 @@ t_els	*last_el(t_els *el)
 	return (NULL);
 }
 
-// static void	set_redir_file(t_mini *mini, t_els **el, char *file)
-// {
-// 	if (file && file[0] != '\0')
-// 	{
-// 		(*el)->redir->file = ft_strdup(file);
-// 		if (!(*el)->redir->file)
-// 		{
-// 			free_els(*el);
-// 			exit_err_malloc_mini(mini, NULL, NULL);
-// 		}
-// 	}
-// 	else
-// 		(*el)->redir->file = NULL;
-// }
-
 void	mini_push_el(t_mini *mini, char **args)///добавить в аргументы список редиректов
 {
 	t_els	*el;
 	t_els	*neww;
+	t_redir	*tmp1;///
+	t_redir	*tmp2;///
+	t_redir	*tmp3;///
 
 	el = NULL;
 	neww = (t_els *)malloc(sizeof(t_els));
 	if (!neww)
 		exit_err_malloc_mini(mini, NULL, NULL);
 	neww->args = copy_2dim_arr(args);
-	neww->redir = (t_redir *)malloc(sizeof(t_redir));//заменить на иниц. списка редиректов
-	neww->redir->r_type = 0;//заменить на иниц. списка редиректов
-	neww->redir->file = NULL;//заменить на иниц. списка редиректов
-	neww->redir->redir_fd = 1;//заменить на иниц. списка редиректов
-	neww->redir->next = NULL;//заменить на иниц. списка редиректов
-	neww->next = NULL;
+	///заменить на иниц. списка редиректов
+	// neww->redir = (t_redir *)malloc(sizeof(t_redir));//
+	// neww->redir->r_type = 0;//
+	// neww->redir->file = NULL;//
+	// neww->redir->next = NULL;//
+	tmp1 = (t_redir *)malloc(sizeof(t_redir));
+	tmp1->r_type = 0;
+	tmp1->file = ft_strdup("a");
+	tmp2 = (t_redir *)malloc(sizeof(t_redir));
+	tmp2->r_type = 0;
+	tmp2->file = ft_strdup("b");
+	tmp1->next = tmp2;
+	tmp3 = (t_redir *)malloc(sizeof(t_redir));
+	tmp3->r_type = 0;
+	tmp3->file = ft_strdup("c");
+	tmp2->next = tmp3;
+	tmp3->next = NULL;
+	neww->redir = tmp1;
+	///
 	if (mini->els)
 	{
 		el = last_el(mini->els);

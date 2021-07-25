@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/16 16:52:40 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/25 19:21:30 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <dirent.h>
 # include <fcntl.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <signal.h>
 # include <termios.h>
@@ -29,7 +30,6 @@
 typedef struct s_redir
 {
 	int				r_type;
-	int				redir_fd;
 	char			*file;
 	struct s_redir	*next;
 }	t_redir;
@@ -72,6 +72,7 @@ void				free_mini_strct(t_mini *mini, int free_envs,
 						int free_echo_n);
 void				free_els(t_els *els);
 void				free_els_list(t_mini *mini);
+void				free_redirs_list(t_mini *mini);
 void				free_fds_arr(t_mini *mini);
 void				mini_push_el(t_mini *mini, char **args);
 t_els				*last_el(t_els *el);
@@ -108,5 +109,10 @@ void				close_all_fds(t_mini *mini);
 void				signal_handler(int sig_num);
 int					ret_stat_termsig(int ret);
 int					exec_redir(t_mini *mini);
+int					exec_redir_trunc_out(t_mini *mini, t_redir *red);
+int					exec_redir_append_out(t_mini *mini, t_redir *red);
+int					exec_redir_in(t_mini *mini, t_redir *red);
+int					exec_redir_heredoc(t_mini *mini, t_redir *red);
+void				status_check(t_redir *red);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 20:53:11 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/16 16:58:08 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/24 17:10:55 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char *argv[], char *envp[])
 		i = 0;
 		while (args[i])//заменить на проход по викиному списку
 		{
-			args1 = ft_split(args[i], ' ');////
+			args1 = ft_split(args[i], ' ');////тут будет парсинг
 			find_put_status(mini, &args1);
 			mini_push_el(mini, args1);//добавить в функцию инициализацию редиректов
 			++mini->n_els;

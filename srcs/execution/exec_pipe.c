@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 13:14:37 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/16 19:13:09 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/25 18:48:16 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,31 @@ void	run_chosen_cmd_pipe(t_mini *mini)
 		exit_no_err(mini, exec_bin_pipe(mini));
 }
 
+static int	pipes_redirs_cases(t_mini *mini)
+{
+	if (mini->n_els_left < mini->n_els)
+	{
+		close(0);
+		dup2(mini->fd[mini->cmd_ind - 1][0], 0);
+	}
+	if (mini->els->next)
+	{
+		close(1);
+		dup2(mini->fd[mini->cmd_ind][1], 1);
+	}
+	if (mini->els->redir->r_type != 0)
+	{
+		if (!exec_redir(mini))
+			return (0);
+	}
+	return (1);
+}
+
 void	exec_cmd_pipe(t_mini *mini)
 {
+	int	block_cmd;
+
+	block_cmd = 0;
 	if (!ft_strcmp(mini->els->args[0], "exit") && mini->n_els > 1)
 		return ;
 	else
@@ -44,16 +67,15 @@ void	exec_cmd_pipe(t_mini *mini)
 		{
 			signal(SIGINT, SIG_DFL);
 			signal(SIGQUIT, SIG_DFL);
-			if (mini->n_els_left < mini->n_els)
-				dup2(mini->fd[mini->cmd_ind - 1][0], 0);
-			if (mini->els->next)
-				dup2(mini->fd[mini->cmd_ind][1], 1);
-			if (mini->els->redir->r_type != 0)
-				exec_redir(mini);
+			if (!pipes_redirs_cases(mini))
+				block_cmd = 1;
 			close(mini->in_out_fds[0]);
 			close(mini->in_out_fds[1]);
 			close_all_fds(mini);
-			run_chosen_cmd_pipe(mini);
+			if (!block_cmd)
+				run_chosen_cmd_pipe(mini);
+			else
+				exit_no_err(mini, mini->status);
 		}
 	}
 }
