@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:19:32 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/06/30 22:30:20 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/27 17:45:59 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ static void	export_print(t_mini *mini)
 	free_2dim_arr(cp_envs);
 }
 
+int	check_char_id(char c, int i)
+{
+	if (i == 0)
+	{
+		if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+				|| (c == '_')))
+			return (0);
+	}
+	else
+	{
+		if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+				|| (c >= '0' && c <= '9') || (c == '_')))
+			return (0);
+	}
+	return (1);
+}
+
 int	check_correct_id(char *str)
 {
 	int		i;
@@ -51,18 +68,8 @@ int	check_correct_id(char *str)
 	while (str && str[i] && str[i] != '=')
 	{
 		c = str[i];
-		if (i == 0)
-		{
-			if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-					|| (c == '_')))
-				return (0);
-		}
-		else
-		{
-			if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-					|| (c >= '0' && c <= '9') || (c == '_')))
-				return (0);
-		}
+		if (!check_char_id(c, i))
+			return (0);
 		++i;
 	}
 	return (1);

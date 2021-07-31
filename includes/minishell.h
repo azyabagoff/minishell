@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/25 19:21:30 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/31 16:46:31 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,17 @@ typedef struct s_mini
 	int			fl_echo_n;
 }	t_mini;
 
+typedef struct s_help
+{
+	char	*beg;
+	char	*cent;
+	char	*endw;
+	int		st;
+	int		end;
+}	t_help;
+
 t_mini				*ret_mini(void);
-void				rl_replace_line (const char *text, int clear_undo);
+void				rl_replace_line(const char *text, int clear_undo);
 char				**copy_2dim_arr(char **arr);
 void				free_2dim_arr(char **arr);
 int					count_els_2dim_arr(char **arr);
@@ -91,6 +100,7 @@ int					ft_cd(t_mini *mini);
 int					ft_pwd(void);
 int					ft_export(t_mini *mini);
 int					check_correct_id(char *str);
+int					check_char_id(char c, int i);
 int					ft_unset(t_mini *mini);
 int					ft_env(t_mini *mini);
 void				print_envs(char **envs, int uninit);
@@ -107,6 +117,7 @@ void				execution(t_mini *mini);
 void				malloc_fds(t_mini *mini, int n_els, int i, int tmp);
 void				close_all_fds(t_mini *mini);
 void				signal_handler(int sig_num);
+void				heredoc_sig_handler(int sig_num);
 int					ret_stat_termsig(int ret);
 int					exec_redir(t_mini *mini);
 int					exec_redir_trunc_out(t_mini *mini, t_redir *red);
@@ -114,5 +125,11 @@ int					exec_redir_append_out(t_mini *mini, t_redir *red);
 int					exec_redir_in(t_mini *mini, t_redir *red);
 int					exec_redir_heredoc(t_mini *mini, t_redir *red);
 void				status_check(t_redir *red);
+void				read_doc(t_mini *mini, t_redir *red, char **doc);
+void				open_envs(t_mini *mini, char **line);
+void				free_3_strs(char *s1, char *s2, char *s3);
+char				*join_free_parts(t_mini *mini,
+						char *s1, char *s2, char *s3);
+char				*change_env(t_mini *mini, char *str, int st, int end);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 14:29:56 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/25 19:29:36 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/07/31 19:25:19 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,19 @@ int	exec_redir_in(t_mini *mini, t_redir *red)
 
 int	exec_redir_heredoc(t_mini *mini, t_redir *red)
 {
-	if (red)
-		return (1);
-	if (mini)
-		return (1);
+	int		fds[2];
+	char	*doc;
+
+	doc = NULL;
+	if (pipe(fds) == -1)
+		exit_err_pipe_mini(mini, NULL, NULL);
+	read_doc(mini, red, &doc);
+	close(0);
+	dup2(fds[0], 0);
+	close(fds[0]);
+	ft_putstr_fd(doc, fds[1]);
+	free(doc);
+	close(fds[1]);
 	return (1);
 }
 
