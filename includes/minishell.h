@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/31 16:46:31 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/01 18:45:31 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_redir
 	int				r_type;
 	char			*file;
 	struct s_redir	*next;
+	int				heredoc_fds[2];
 }	t_redir;
 
 typedef struct s_els
@@ -84,6 +85,7 @@ void				free_els_list(t_mini *mini);
 void				free_redirs_list(t_mini *mini);
 void				free_fds_arr(t_mini *mini);
 void				mini_push_el(t_mini *mini, char **args);
+int					heredoc_read(t_mini *mini);
 t_els				*last_el(t_els *el);
 void				find_put_status(t_mini *mini, char ***args);
 void				change_shlvl(t_mini *mini);
@@ -123,9 +125,9 @@ int					exec_redir(t_mini *mini);
 int					exec_redir_trunc_out(t_mini *mini, t_redir *red);
 int					exec_redir_append_out(t_mini *mini, t_redir *red);
 int					exec_redir_in(t_mini *mini, t_redir *red);
-int					exec_redir_heredoc(t_mini *mini, t_redir *red);
+void				exec_redir_heredoc(t_redir *red);
 void				status_check(t_redir *red);
-void				read_doc(t_mini *mini, t_redir *red, char **doc);
+char				*read_doc(t_mini *mini, t_redir *red);
 void				open_envs(t_mini *mini, char **line);
 void				free_3_strs(char *s1, char *s2, char *s3);
 char				*join_free_parts(t_mini *mini,

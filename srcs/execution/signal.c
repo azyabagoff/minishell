@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 21:50:51 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/31 19:25:37 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/01 19:26:22 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,15 @@ void	signal_handler(int sig_num)
 
 void	heredoc_sig_handler(int sig_num)
 {
-	int		kill_flag;
 	t_mini	*mini;
 
 	mini = ret_mini();
-	kill_flag = kill(mini->pid, sig_num);
-	if (sig_num == SIGINT && kill_flag)
+	if (sig_num == SIGINT)
 	{
 		ft_putstr_fd("> ", 1);
 		ft_putstr_fd(rl_line_buffer, 1);
 		ft_putstr_fd("  \n", 1);
 		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
-		ft_putstr_fd("\033[A\nminishell > ", 1);
-		mini->status = 1;
-		readline(NULL);
+		exit(1);
 	}
 }
-
-// void	heredoc_sig_handler(int sig_num)
-// {
-// 	t_mini	*mini;
-
-// 	mini = ret_mini();
-// 	if (sig_num == SIGINT)
-// 	{
-// 		ft_putstr_fd("\n", 1);
-// 		rl_on_new_line();
-// 		exit(1);
-// 	}
-// }

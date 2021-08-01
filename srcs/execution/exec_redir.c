@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 14:29:56 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/31 19:25:19 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/01 20:53:16 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,11 @@ int	exec_redir_in(t_mini *mini, t_redir *red)
 	return (1);
 }
 
-int	exec_redir_heredoc(t_mini *mini, t_redir *red)
+void	exec_redir_heredoc(t_redir *red)//норма чутка
 {
-	int		fds[2];
-	char	*doc;
-
-	doc = NULL;
-	if (pipe(fds) == -1)
-		exit_err_pipe_mini(mini, NULL, NULL);
-	read_doc(mini, red, &doc);
 	close(0);
-	dup2(fds[0], 0);
-	close(fds[0]);
-	ft_putstr_fd(doc, fds[1]);
-	free(doc);
-	close(fds[1]);
-	return (1);
+	dup2(red->heredoc_fds[0], 0);
+	close(red->heredoc_fds[0]);
 }
 
 int	exec_redir(t_mini *mini)
@@ -107,7 +96,7 @@ int	exec_redir(t_mini *mini)
 				return (0);
 		}
 		else if (red->r_type == 4)
-			exec_redir_heredoc(mini, red);
+			exec_redir_heredoc(red);
 		red = red->next;
 	}
 	return (1);

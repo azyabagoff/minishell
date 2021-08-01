@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:35:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/26 22:17:39 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/01 20:04:27 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	execution(t_mini *mini)
 	int	block_cmd;
 
 	block_cmd = 0;
+	if (!heredoc_read(mini))
+		return ;
 	if (mini->n_els > 1)
 		exec_pipe(mini);
 	else

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 21:43:33 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/24 18:47:26 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/01 20:16:29 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	free_els_list(t_mini *mini)
 	t_els	*el;
 
 	el = NULL;
+	mini->els = NULL;
 	if (mini->start_el)
 	{
 		while (mini->start_el)

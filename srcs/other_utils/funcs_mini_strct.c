@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:23:01 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/31 17:06:04 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/01 18:17:34 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	mini_push_el(t_mini *mini, char **args)///добавить в аргуме�
 	// tmp3->file = ft_strdup("c");
 	// tmp2->next = tmp3;
 	// tmp3->next = NULL;
-	// neww->redir = tmp1;
+	// neww->redir->next = tmp1;
 	///
 	if (mini->els)
 	{
