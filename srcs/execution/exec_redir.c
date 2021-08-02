@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 14:29:56 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/08/01 20:53:16 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:39:30 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	exec_redir_in(t_mini *mini, t_redir *red)
 	return (1);
 }
 
-void	exec_redir_heredoc(t_redir *red)//норма чутка
+void	exec_redir_heredoc(t_redir *red)
 {
 	close(0);
 	dup2(red->heredoc_fds[0], 0);

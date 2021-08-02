@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 14:35:40 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/08/01 20:04:27 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/02 14:23:38 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	fork_for_exec_bin_c(t_mini *mini, char *path)
 
 void	exec_cmd(t_mini *mini)
 {
-	if (!ft_strcmp(mini->els->args[0], "echo"))
+	if (!ft_strcmp_low_left(mini->els->args[0], "echo"))
 		mini->status = ft_echo(mini, mini->els->args);
 	else if (!ft_strcmp(mini->els->args[0], "cd"))
 		mini->status = ft_cd(mini);
-	else if (!ft_strcmp(mini->els->args[0], "pwd"))
+	else if (!ft_strcmp_low_left(mini->els->args[0], "pwd"))
 		mini->status = ft_pwd();
 	else if (!ft_strcmp(mini->els->args[0], "export"))
 		mini->status = ft_export(mini);
 	else if (!ft_strcmp(mini->els->args[0], "unset"))
 		mini->status = ft_unset(mini);
-	else if (!ft_strcmp(mini->els->args[0], "env"))
+	else if (!ft_strcmp_low_left(mini->els->args[0], "env"))
 		mini->status = ft_env(mini);
 	else if (!ft_strcmp(mini->els->args[0], "exit"))
 		mini->status = ft_exit(mini);

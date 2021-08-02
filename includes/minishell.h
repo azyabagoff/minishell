@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:37:45 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/08/01 18:45:31 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:45:29 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,6 @@ void				status_check(t_redir *red);
 char				*read_doc(t_mini *mini, t_redir *red);
 void				open_envs(t_mini *mini, char **line);
 void				free_3_strs(char *s1, char *s2, char *s3);
-char				*join_free_parts(t_mini *mini,
-						char *s1, char *s2, char *s3);
 char				*change_env(t_mini *mini, char *str, int st, int end);
 
 #endif

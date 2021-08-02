@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 21:50:51 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/08/01 19:26:22 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:46:38 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ void	signal_handler(int sig_num)
 
 void	heredoc_sig_handler(int sig_num)
 {
-	t_mini	*mini;
-
-	mini = ret_mini();
 	if (sig_num == SIGINT)
 	{
 		ft_putstr_fd("> ", 1);

@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/26 19:44:35 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/08/01 20:52:35 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/02 12:39:20 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,7 @@ int	heredoc_read(t_mini *mini)
 {
 	t_els	*els;
 	t_redir	*red;
-	char	*doc;
-	int		pid;
-	int		status;
 
-	pid = 0;
-	status = 0;
-	doc = NULL;
 	red = NULL;
 	els = mini->els;
 	while (els)

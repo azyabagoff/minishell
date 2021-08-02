@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 15:59:13 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 14:13:07 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/02 15:32:59 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static char	*find_cmd_dir(char **dirs, char *cmd)
 	while (dirs && dirs[i])
 	{
 		dir = opendir(dirs[i]);
-		if (!dir)
-			return (NULL);
+		if (!dir && ++i)
+			continue ;
 		item = readdir(dir);
 		while (item)
 		{

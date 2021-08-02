@@ -6,7 +6,7 @@
 #    By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/07 18:33:46 by sesnowbi          #+#    #+#              #
-#    Updated: 2021/07/06 14:09:03 by sesnowbi         ###   ########.fr        #
+#    Updated: 2021/08/02 14:14:26 by sesnowbi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS	= ft_memset.c \
 		  ft_strnstr.c \
 		  ft_strncmp.c \
 		  ft_strcmp.c \
+		  ft_strcmp_low_up.c \
 		  ft_atoi.c \
 		  ft_atoll.c \
 		  ft_isalpha.c \
@@ -35,6 +36,7 @@ SRCS	= ft_memset.c \
 		  ft_isprint.c \
 		  ft_toupper.c \
 		  ft_tolower.c \
+		  ft_str_to_lower_upper.c \
 		  ft_calloc.c \
 		  ft_strdup.c \
 		  ft_substr.c \

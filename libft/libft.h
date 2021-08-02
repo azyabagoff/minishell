@@ -6,7 +6,7 @@
 /*   By: sesnowbi <sesnowbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 19:51:09 by sesnowbi          #+#    #+#             */
-/*   Updated: 2021/07/06 14:09:54 by sesnowbi         ###   ########.fr       */
+/*   Updated: 2021/08/02 14:22:43 by sesnowbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char				*ft_strnstr(const char *haystack,
 						const char *needle, size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
+int					ft_strcmp_low_left(const char *s1, const char *s2);
+int					ft_strcmp_up_left(const char *s1, const char *s2);
 int					ft_atoi(const char *str);
 long long			ft_atoll(const char *str);
 int					ft_isalpha(int c);
@@ -50,6 +52,8 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+char				*ft_str_tolower(char *str);
+char				*ft_str_toupper(char *str);
 void				*ft_calloc(size_t count, size_t size);
 char				*ft_strdup(const char *s1);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
