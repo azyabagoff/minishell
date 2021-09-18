@@ -7,4 +7,4 @@ My part was executable and my teammate's part was parsing of terminal input stri
 
 To launch minishell, write "make" command and then write "./minishell" command in the directory, where Makefile is located.
 
-Full subject of the project is in subject.en.pdf
+Full subject of the project is in the "subject.en.pdf" file.
