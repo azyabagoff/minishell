@@ -3,7 +3,7 @@ Stripped-down copy of bash. Supports buildins(cd, pwd, echo, env, export), execu
 
 2 people worked on this project in a team.
 
-My part was executable and my teamemate's part was parsing of terminal input string.
+My part was executable and my teammate's part was parsing of terminal input string.
 
 To launch minishell, write "make" command and then write "./minishell" command in the directory, where Makefile is located.
 
